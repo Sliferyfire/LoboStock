@@ -1,0 +1,42 @@
+.layout {
+  display: grid;
+  grid:
+    "sidebar body" 1fr
+    / auto 1fr;
+  gap: 8px;
+
+  height: 100vh;
+  
+}
+
+.sidebar { grid-area: sidebar; }
+.body { grid-area: body; }
+
+.layout_column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.layout_2 {
+  height: 100vh;
+
+  display: grid;
+  grid:
+    "header" auto
+    "main" 1fr
+    "." auto
+    / 1fr;
+  gap: 8px;
+}
+
+.header { grid-area: header; }
+.main { grid-area: main;}
+
+.layout_3 {
+
+  display: flex;
+  gap: 16px;
+}
+
+.grow1 { flex-grow: 1; }

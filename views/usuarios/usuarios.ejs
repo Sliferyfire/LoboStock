@@ -1,0 +1,66 @@
+<%- include("../templates/encabezado")%>
+
+
+<section  class="layout">
+    <div class="sidebar bg-dark col-sm-auto  sticky-top"><%- include("../templates/menu")%></div>
+    <div class="body">
+      <div class="container mt-3 mb-2 ml-1" >
+        <section class="layout_2">
+          <div class="header">
+            <%- include("../templates/navbar/navbarUsuarios")%>
+          </div>
+          <div class="main">
+            
+            <div class="container mt-5">
+              <div class="card">
+                  <div class="card-header">
+                      <h1>Usuarios</h1>
+                  </div>
+                  <div class="card-body">
+                      <table class="table table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Id</th>
+                                  <th>Nivel</th>
+                                  <th>Nombre</th>
+                                  <th>Usuario</th>
+                                  <th>Password</th>
+                                  <th>Editar | Borrar</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <%
+                                  usuarios.forEach((usuario)=>{
+          
+                                  
+                              %>
+                              <tr>
+                                  <td><%= usuario.id %></td>
+                                  <td><%= usuario.nivel %></td>
+                                  <td><%= usuario.nombre %></td>
+                                  <td><%= usuario.usuario %></td>
+                                  <td><%= usuario.password %></td>
+                                  <td>
+                                      <a href="/editar/<%= usuario.id %>">Editar</a>
+                                      <a href="/borrar/<%= usuario.id %>">Borrar</a>
+                                  </td>
+                              </tr>
+                              
+                              <%
+                              });
+                              %>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="card-footer"></div>
+              </div>
+          </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+</section>
+
+
+<%- include("../templates/pie")%>

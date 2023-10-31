@@ -1,0 +1,72 @@
+<%- include("../templates/encabezado")%>
+
+
+<section  class="layout">
+    <div class="sidebar bg-dark col-sm-auto  sticky-top"><%- include("../templates/menu")%></div>
+    <div class="body">
+      <div class="container mt-3 mb-2 ml-1">
+        <section class="layout_2">
+          <div class="header">
+            <%- include("../templates/navbar/navbarProductos")%>
+          </div>
+          <div class="main">
+            
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Productos</h1>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Descripcion</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>FechaIngreso</th>
+                                    <th>FechaEgreso</th>                      
+                                    <th>Foto</th>
+                                    <th>Editar | Borrar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    productos.forEach((producto)=>{
+            
+                                    
+                                %>
+                                <tr>
+                                    <td><%= producto.id %></td>
+                                    <td><%= producto.nombre %></td>
+                                    <td><%= producto.descripcion %></td>
+                                    <td><%= producto.precio %></td>
+                                    <td><%= producto.stock %></td>
+                                    <td><%= producto.fechaIngreso %></td>
+                                    <td><%= producto.fechaEgreso %></td>
+                                    <td><%= producto.foto %></td>
+                                    <td>
+                                        <a href="/editarProd/<%= producto.id %>">Editar</a>
+                                        <a href="/borrarProd/<%= producto.id %>">Borrar</a>
+                                    </td>
+                                </tr>
+                                
+                                <%
+                                });
+                                %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+</section>
+
+
+<%- include("../templates/pie")%>
