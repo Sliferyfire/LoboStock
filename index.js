@@ -7,6 +7,8 @@ var session = require("cookie-session");
 require("dotenv").config();
 var rutas = require("./routes/usuariosRutas");
 var rutasPr = require("./routes/productosRutas");
+var rutasUsuariosApis = require("./routes/usuariosRutasApis");
+var rutasProductosApis = require("./routes/productoRutasApis");
 
 
 var app = express();
@@ -30,6 +32,8 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font/fonts'));
 app.use('/', rutas);
 app.use('/', rutasPr);
+app.use("/",rutasUsuariosApis);
+app.use("/",rutasProductosApis);
   
 
 var port = process.env.PORT || 3000;
