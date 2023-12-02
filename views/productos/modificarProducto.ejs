@@ -1,0 +1,62 @@
+
+<%- include("../templates/encabezado")%>
+
+<section class="layout">
+    <div class="sidebar bg-dark col-sm-auto sticky-top"><%- include("../templates/menu")%></div>
+    <div class="body">
+
+        <div class="container py-4">
+            <div class="row">
+                
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <span class="anchor" id="formRegister"></span>
+                            
+                            <div class="card card-outline-secondary">
+                                <div class="card-header">
+                                    <h3 class="mb-0">Editar producto</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/editarProducto" method="post" class="form" role="form" autocomplete="off" enctype="multipart/form-data">
+                                        <input type="hidden" id="id" name="id" value="<%= prod.id%>">
+                                        <input type="hidden" id="fechaIngreso" name="fechaIngreso" value="<%= prod.fechaIngreso%>">
+                                        <input type="hidden" id="fechaEgreso" name="fechaEgreso" value="<%= prod.fechaEgreso%>">
+                                        <div class="form-group">
+                                            <label for="inputName">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required="" value="<%= prod.nombre%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail3">Descripcion</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" required="" value="<%= prod.descripcion%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3">Precio</label>
+                                            <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" min="0" required="" value="<%= prod.precio%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3">Stock</label>
+                                            <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock" min="0" required="" value="<%= prod.stock%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputVerify3">Foto</label>
+                                            <input type="file" class="form-control" id="foto" name="foto" placeholder="Photo">
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success btn-lg float-right">Modify Product</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </section>
+
+<%- include("../templates/pie")%>

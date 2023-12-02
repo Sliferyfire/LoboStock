@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%;">
     <div class="container-fluid">
-        <div class="container-fluid">
+        <div class="container-fluid px-5">
             <a class="navbar-brand" href="#">
               <img src="/logo/LoboStock.png" alt="Logo"  height="24" class="d-inline-block align-text-top">
             </a>
@@ -9,9 +9,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
         <form action="/filtrar" method="post" class="d-flex">
-            <select class="form-select" name="nivel" id="nivel" aria-label="Default select example" style="width: fit-content;">
+            <select class="form-select me-2" name="nivel" id="nivel" aria-label="Default select example" style="width: fit-content;">
                 <option selected>Mostrar todos</option>
                 <option value="0">Nivel 0</option>
                 <option value="1">Nivel 1</option>
@@ -20,6 +19,8 @@
             </select>
             <button class="btn btn-outline-primary" type="submit">Filtrar</button>
         </form>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form action="/filtrar" class="d-flex" role="search" method="post">
           <input class="form-control me-2" id="buscar" name="buscar" type="search" placeholder="Search" aria-label="Search" style="width: 200px;">
           <button class="btn btn-outline-primary" type="submit">Search</button>

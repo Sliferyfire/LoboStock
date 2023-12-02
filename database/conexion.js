@@ -7,5 +7,6 @@ admin.initializeApp({
 var micuenta=admin.firestore();
 var conexion=micuenta.collection("usuarios"); 
 var conexionpr=micuenta.collection("productos"); 
+var conexionprb=micuenta.collection("productosBaja"); 
 
-module.exports=conexion;
+module.exports={conexion,conexionpr,conexionprb};

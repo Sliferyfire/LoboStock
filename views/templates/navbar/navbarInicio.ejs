@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%;">
   <div class="container-fluid">
-      <div class="container-fluid">
+      <div class="container-fluid px-5">
           <a class="navbar-brand" href="#">
             <img src="/logo/LoboStock.png" alt="Logo"  height="24" class="d-inline-block align-text-top">
           </a>
@@ -10,20 +10,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
-      <form action="/filtrarProducto" method="post" class="d-flex">
+      <form action="/filtrarProductoInicio" method="post" class="d-flex">
           <select class="form-select" name="precio" id="precio" aria-label="Default select example" style="width: fit-content;">
             <option selected>Filtrar por Precio</option>
             <option value="0">Menos de 50</option>
             <option value="1">50 - 100</option>
             <option value="2">Mas de 100</option>
           </select>
-          <select class="form-select" id="categoria" name="categoria" aria-label="Default select example" style="width: fit-content;">
-              <option selected>Filtrar por Categoria</option>
-              <option value="0">Categoria 0</option>
-              <option value="1">Categoria 1</option>
-              <option value="2">Categoria 2</option>
-              <option value="3">Categoria 3</option>
-          </select>
+          <select class="form-select me-2" name="categoria" id="categoria" aria-label="Default select example" style="width: fit-content;">
+            <option selected>Mostrar todos</option>
+            <option value="pantalon">Pantalones</option>
+            <option value="falda">Faldas</option>
+            <option value="camisa">Camisas</option>
+            <option value="sudadera">Sudaderas</option>
+        </select>
           <button class="btn btn-outline-success" type="submit">Filtrar</button>
       </form>
       <form action="/filtrarProducto" class="d-flex" role="search" method="post">

@@ -1,5 +1,7 @@
-var conexion=require("./conexion");
+var conexion=require("./conexion").conexion;
+var {encriptarPassword} = require("../functions/funcionesPassword");
 var Usuario=require("../models/Usuario");
+
 async function mostrarUsuarios(){
     var users=[];
     try{
@@ -49,45 +51,70 @@ async function buscarPorUsuario(usuario){
 }
 
 async function nuevoUsuario(datos){
-    var user=new Usuario(null,datos);
-    var error=1;
-    if (user.bandera==0){
-        try{
+    // console.log(datos);
+    var {hash,salt}= encriptarPassword(datos.password);
+    datos.password = hash;
+    datos.salt = salt;
+    datos.admin = false;
+    var user = new Usuario(null,datos);
+    var error = 1;
+    if (user.bandera == 0){
+        try {
             await conexion.doc().set(user.obtenerDatos);
-            console.log("Usuario insertado a la BD ");   
-            error=0;
-        }
-        catch(err){
-            console.log("Error al capturar el nuevo usuario " +err);
+            console.log("Usuario insertado a la BD");
+            error = 0;
+        } 
+        catch (err) {
+            console.log("Error al capturar el nuevo usuario: " + err);
         }
     }
     return error;
 }
 
 async function modificarUsuario(datos){
-    var user=new Usuario(datos.id, datos);
-    var error=1;
-    if (user.bandera==0){
-        try{
-            await conexion.doc(user.id).set(user.obtenerDatos);
-            console.log("Registro actualizado ");
-            error=0;
+    console.log(datos);
+    var error = 1; 
+    var respuestaBuscar = await buscarPorID(datos.id);
+    if (respuestaBuscar != undefined){
+        if(datos.password == ""){
+            pass = buscarPorID(datos.id);
+            datos.password = pass.password;
+            datos.salt = pass.salt;
         }
-        catch(err){
-            console.log("Error al modificar al usuario "+err);
+        else{
+            var{salt,hash} = encriptarPassword(datos.password);
+            datos.password = hash;
+            datos.salt = salt;
+        }
+        var user = new Usuario(datos.id,datos);
+        if (user.bandera == 0){
+            try {
+                await conexion.doc(user.id).set(user.obtenerDatos);
+                console.log("Registro actualizado");
+                error = 0;
+            } 
+            catch (err) {
+                console.log("Error al modificar al usuario: "+err);    
+            }
         }
     }
     return error;
 }
 
 async function borrarUsuario(id){
-    try{
-        await conexion.doc(id).delete();
-        console.log("Registro borrado ");
+    var error=1;
+    var user = await buscarPorID(id);
+    if (user != undefined){
+        try {
+            await conexion.doc(id).delete();
+            console.log("Registro borrado");
+            error=0;
+        } 
+        catch (err) {
+            console.log("Error al borrar al usuario: "+err);    
+        }
     }
-    catch{
-        console.log("Error al borrar al usuario "+err);
-    }
+    return error;
 }
 
 async function filtrarPorNivel(nivel){

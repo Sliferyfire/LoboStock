@@ -5,8 +5,8 @@ class Usuario{
         this.nombre=data.nombre;
         this.usuario=data.usuario;
         this.password=data.password;
-        this.foto=data.foto;
-        //this.salt=data.salt;
+        // this.foto=data.foto;
+        this.salt=data.salt;
         this.nivel=data.nivel;
     }
 
@@ -24,14 +24,14 @@ class Usuario{
     set usuario(usuario){
         usuario.length>0? (this._usuario=usuario) : (this.bandera=1);
     }
-    set foto(foto){
-        foto.length>0? (this._foto=foto) : (this.bandera=1);
-    }
-    //set salt(salt){
-     //   salt.length>0? (this._salt=salt) : (this.bandera=1);
-   // }
+    // set foto(foto){
+    //     foto.length>0? (this._foto=foto) : (this.bandera=1);
+    // }
+    set salt(salt){
+       salt.length>0? (this._salt=salt) : (this.bandera=1);
+   }
     set nivel(nivel){
-        nivel.length>0? (this._nivel=nivel) : (this.nivel=1)
+        nivel.length>0? (this._nivel=nivel) : (this.bandera=1)
     }
 
     get id(){
@@ -46,12 +46,12 @@ class Usuario{
     get password(){
         return this._password;
     }
-    get foto(){
-        return this._foto;
+    // get foto(){
+    //     return this._foto;
+    // }
+    get salt(){
+       return this._salt;
     }
-    //get salt(){
-     //   return this._salt;
-    //}
     get nivel(){
         return this._nivel;
     } 
@@ -63,8 +63,8 @@ class Usuario{
                 nombre:this.nombre,
                 usuario:this.usuario,
                 password:this.password,
-                //salt:this.salt,
-                foto:this.foto,
+                salt:this.salt,
+                // foto:this.foto,
                 nivel:this.nivel
             }
         else{
@@ -72,8 +72,8 @@ class Usuario{
                 nombre:this.nombre,
                 usuario:this.usuario,
                 password:this.password,
-               // salt:this.salt,
-                foto:this.foto,
+               salt:this.salt,
+                // foto:this.foto,
                 nivel:this.nivel
             }
         }

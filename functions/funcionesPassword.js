@@ -16,14 +16,14 @@ function validarPassword(password,hash,salt) {
     return  (hashEvaluar === hash);
 }
 
-// function autorizado(req,res,cb) {
-//     if(req.session.usuario || req.session.admin){
-//         cb();
-//     }
-//     else{
-//         res.redirect("/");
-//     }
-// }
+function autorizado(req,res,cb) {
+    if(req.session.usuario || req.session.admin){
+        cb();
+    }
+    else{
+        res.redirect("/");
+    }
+}
 
 // function admin(req,res,cb) {
 //     if(req.session.admin)
@@ -41,7 +41,7 @@ function validarPassword(password,hash,salt) {
 module.exports = {
     encriptarPassword,
     validarPassword,
-    // autorizado,
+    autorizado,
     // admin
 }
 

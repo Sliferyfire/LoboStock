@@ -1,15 +1,19 @@
 <%- include("../templates/encabezado")%>
 
-
 <section  class="layout">
-    <div class="sidebar bg-dark col-sm-auto  sticky-top"><%- include("../templates/menu")%></div>
+    <div class="sidebar bg-dark col-sm-auto  sticky-top" style="z-index: 999;"><%- include("../templates/menu")%></div>
     <div class="body">
       <div class="container mt-3 mb-2 ml-1" >
         <section class="layout_2">
           <div class="header">
-            <%- include("../templates/navbar/navbarUsuarios")%>
+            <nav class="navbar fixed-top navbar-light bg-light" style="z-index: 100;">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#"><%- include("../templates/navbar/navbarUsuarios")%></a>
+                </div>
+            </nav>
+            
           </div>
-          <div class="main">
+          <div class="main mt-4">
             
             <div class="container mt-5">
               <div class="card">
@@ -39,9 +43,10 @@
                                   <td><%= usuario.nivel %></td>
                                   <td><%= usuario.nombre %></td>
                                   <td><%= usuario.usuario %></td>
-                                  <td><%= usuario.password %></td>
+                                  <td><textarea class="form-control mb-3" cols="30" rows="2" style="overflow: hidden"><%= usuario.password %></textarea></td>
                                   <td>
                                       <a href="/editar/<%= usuario.id %>">Editar</a>
+                                       / 
                                       <a href="/borrar/<%= usuario.id %>">Borrar</a>
                                   </td>
                               </tr>

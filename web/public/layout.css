@@ -5,7 +5,7 @@
     / auto 1fr;
   gap: 8px;
 
-  height: 100vh;
+  height: 100%;
   
 }
 
@@ -19,7 +19,7 @@
 }
 
 .layout_2 {
-  height: 100vh;
+  height: 100%;
 
   display: grid;
   grid:
@@ -30,7 +30,11 @@
   gap: 8px;
 }
 
-.header { grid-area: header; }
+.header { 
+  grid-area: header; 
+  
+
+}
 .main { grid-area: main;}
 
 .layout_3 {

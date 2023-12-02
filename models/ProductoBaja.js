@@ -1,15 +1,13 @@
-class Producto{
+class ProductoBaja{
     constructor(id, data){
         this.bandera=0;
         this.id=id;
         this.nombre=data.nombre;
         this.descripcion=data.descripcion;
-        this.categoria=data.categoria;
         this.precio=data.precio;
-        this.foto=data.foto;
         this.fechaEgreso=data.fechaEgreso;
         this.fechaIngreso=data.fechaIngreso;
-        this.stock=data.stock;
+        this.usuarioBaja=data.usuarioBaja;
     }
     set id(id){
         if(id!=null){
@@ -22,14 +20,8 @@ class Producto{
     set descripcion(descripcion){
         descripcion.length>0? (this._descripcion=descripcion) : (this.bandera=1);
     }
-    set categoria(categoria){
-        categoria.length>0? (this._categoria=categoria) : (this.bandera=1);
-    }
     set precio(precio){
         precio.length>0? (this._precio=precio) : (this.bandera=1);
-    }
-    set foto(foto){
-        foto.length>0? (this._foto=foto) : (this.bandera=1);
     }
     set fechaEgreso(fechaEgreso){
         fechaEgreso.length>0? (this._fechaEgreso=fechaEgreso) : (this.bandera=1);
@@ -37,8 +29,8 @@ class Producto{
     set fechaIngreso(fechaIngreso){
         fechaIngreso.length>0? (this._fechaIngreso=fechaIngreso) : (this.bandera=1);
     }
-    set stock(stock){
-        stock.length>0? (this._stock=stock) : (this.bandera=1);
+    set usuarioBaja(usuarioBaja){
+        usuarioBaja.length>0? (this._usuarioBaja=usuarioBaja) : (this.bandera=1);
     }
 
 
@@ -51,14 +43,8 @@ class Producto{
     get descripcion(){
         return this._descripcion; 
     }
-    get categoria(){
-        return this._categoria; 
-    }
     get precio(){
         return this._precio;
-    }
-    get foto(){
-        return this._foto;
     }
     get fechaEgreso(){
         return this._fechaEgreso;
@@ -66,8 +52,8 @@ class Producto{
     get fechaIngreso(){
         return this._fechaIngreso;
     }
-    get stock(){
-        return this._stock;
+    get usuarioBaja(){
+        return this._usuarioBaja;
     }
 
 
@@ -77,26 +63,22 @@ class Producto{
                 id:this.id,
                 nombre:this.nombre,
                 descripcion:this.descripcion,
-                categoria:this.categoria,
                 precio:this.precio,
-                foto:this.foto,
                 fechaEgreso:this.fechaEgreso,
                 fechaIngreso:this.fechaIngreso,
-                stock:this.stock
+                usuarioBaja:this.usuarioBaja
             }
         else{
             return {
                 nombre:this.nombre,
                 descripcion:this.descripcion,
-                categoria:this.categoria,
                 precio:this.precio,
-                foto:this.foto,
                 fechaEgreso:this.fechaEgreso,
                 fechaIngreso:this.fechaIngreso,
-                stock:this.stock
+                usuarioBaja:this.usuarioBaja
             }
         }
     }
 }
 
-module.exports=Producto;
+module.exports=ProductoBaja;

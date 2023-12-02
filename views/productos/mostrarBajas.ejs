@@ -19,45 +19,37 @@
             <div class="container mt-5">
                 <div class="card">
                     <div class="card-header">
-                        <h1>Productos</h1>
+                        <h1>Productos Bajas</h1>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>Id Baja</th>
                                     <th>Nombre</th>
-                                    <th>Descripcion</th>
-                                    <th>Categoria</th>
                                     <th>Precio</th>
-                                    <th>Stock</th>
                                     <th>FechaIngreso</th>
-                                    <!-- <th>FechaEgreso</th>                       -->
-                                    <th>Foto</th>
-                                    <th>Editar | Borrar</th>
+                                    <th>FechaEgreso</th> 
+                                    <th>Usuario Baja</th> 
+                                    <th>Borrar</th>                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <%
-                                    productos.forEach((producto)=>{
+                                prodBajas.forEach((producto)=>{
             
                                     
                                 %>
-                                <tr> 
+                                <tr>
                                     <td><%= producto.id %></td>
                                     <td><%= producto.nombre %></td>
-                                    <td><%= producto.descripcion %></td>
-                                    <td><%= producto.categoria %></td>
                                     <td>$<%= producto.precio %></td>
-                                    <td><%= producto.stock %></td>
                                     <td><%= producto.fechaIngreso %></td>
-                                    <!-- <td><%= producto.fechaEgreso %></td> -->
-                                    <td><img src="/images/<%= producto.foto %>" alt="<%= producto.nombre %>" width="80px"></td>
+                                    <td><%= producto.fechaEgreso %></td>
+                                    <td><%= producto.usuarioBaja %></td>
                                     <td>
-                                        <a href="/editarProducto/<%= producto.id %>">Editar</a>
-                                         / 
-                                        <a href="/borrarProducto/<%= producto.id %>">Borrar</a>
-                                    </td>
+                                      <a href="/borrarBajaProducto/<%= producto.id %>">Borrar</a>
+                                  </td>
                                 </tr>
                                 
                                 <%

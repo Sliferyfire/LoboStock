@@ -1,70 +1,76 @@
-var conexionpr=require("./conexion").conexionpr;
+var conexion=require("./conexion").conexionpr;
 var Producto=require("../models/Producto");
 
 async function mostrarProductos(){
-    var products=[];
+    var prods=[];
     try{
-        var productos=await conexionpr.get(); 
-        console.log(productos.id);
-        productos.forEach(producto =>{
-            var product=new Producto(producto.id, producto.data());
-            if (product.bandera==0){
-                products.push(product.obtenerDatosProd);
+        var productos = await conexion.get();
+        // console.log(productos.nombre);
+        productos.forEach(producto => {
+            var prod=new Producto(producto.id, producto.data());
+            if (prod.bandera == 0){
+                prods.push(prod.obtenerDatos);
             }
         });
     }
     catch(err){
-        console.log("Error al recuperar producto de la BD "+err);
+        console.log("Error al recuperar productos de la BD: " + err);
     }
-    return products;
+    return prods;
 }
-
-async function buscarPorIDProd(id){
-    var product;
-    //console.log(id);
-    try{
-        var producto=await conexionpr.doc(id).get();
-        var productoObjeto=new Producto(producto.id, producto.data());
-        if (productoObjeto.bandera==0){
-            product=productoObjeto.obtenerDatosProd;
+ 
+async function buscarProdPorID(id){
+    var prod;
+    try {
+        var producto=await conexion.doc(id).get();
+        var productoObjeto = new Producto(producto.id,producto.data());
+        if (productoObjeto.bandera == 0){   
+            prod = productoObjeto.obtenerDatos;
         }
+    } 
+    catch (err) {
+        console.log("Error al recuperar el producto: " + err);
     }
-    catch(err){
-        console.log("Error al recuperar al producto "+ err);
-    }
-    return product;
+    return prod;    
 }
 
 async function nuevoProducto(datos){
-    var product=new Producto(null,datos);
-    var error=1;
-    if (product.bandera==0){
-        try{
-            await conexionpr.doc().set(product.obtenerDatosProd);
-            console.log("Producto insertado a la BD ");   
-            error=0;
-        }
-        catch(err){
-            console.log("Error al capturar el nuevo producto " +err);
+    var fechaActual = new Date();
+    var año = fechaActual.getFullYear();
+    var mes = fechaActual.getMonth() + 1;
+    var dia = fechaActual.getDate();
+    datos.fechaIngreso = año + '-' + mes + '-' + dia
+    datos.fechaEgreso = '0001-01-01'
+
+    var prod = new Producto(null,datos);
+    var error = 1;
+    if (prod.bandera == 0){
+        try {
+            await conexion.doc().set(prod.obtenerDatos);
+
+            console.log("Producto insertado a la BD");
+            error = 0;
+        } 
+        catch (err) {
+            console.log("Error al capturar el nuevo producto: " + err);
         }
     }
     return error;
 }
 
 async function modificarProducto(datos){
-    var error=1;
-    var respuestaBuscar= await buscarPorIDProd (datos.id);
-    if (respuestaBuscar != undefined){
-        var product=new Producto(datos.id, datos);
-        var error=1;
-        if (product.bandera==0){
-            try{
-                await conexionpr.doc(product.id).set(product.obtenerDatosProd);
-                console.log("Registro actualizado ");
-                error=0;
-            }
-            catch(err){
-                console.log("Error al modificar al producto "+err);
+    var error = 1; 
+    var respuestaBuscar = await buscarProdPorID(datos.id);
+    if(respuestaBuscar!=undefined){
+        var prod = new Producto(datos.id,datos);
+        if (prod.bandera == 0){
+            try {
+                await conexion.doc(prod.id).set(prod.obtenerDatos);
+                console.log("Producto actualizado");
+                error = 0;
+            } 
+            catch (err) {
+                console.log("Error al modificar el producto: "+err);    
             }
         }
     }
@@ -72,25 +78,45 @@ async function modificarProducto(datos){
 }
 
 async function borrarProducto(id){
-    var error=1;
-    var product = await buscarPorIDProd(id);
-    if (product!=undefined){
-        try{
-            await conexionpr.doc(id).delete();
-            console.log("Registro borrado ");
-            error=0;
+    var error = 1;
+    var prod = await buscarProdPorID(id)
+    if(prod!=undefined){
+        try {
+            await conexion.doc(id).delete();
+            console.log("Producto borrado");
+            error = 0;
+        } 
+        catch (err) {
+            console.log("Error al borrar al producto: "+err);    
         }
-        catch{
-            console.log("Error al borrar al producto "+err);
-        }
-        return error;
     }
+    return error;
 }
+
+async function filtrarPorCategoria(categoria){
+    const prods = conexion;
+    var data=[];
+    const snapshot = await prods.where('categoria', '==', categoria).get();
+    if (snapshot.empty) {
+        console.log('No se encontraron documentos');
+        return;
+    }  
+    snapshot.forEach(doc => {
+        var prod=new Producto(doc.id, doc.data());
+        if (prod.bandera==0){
+            data.push(prod.obtenerDatos);
+        }
+    });
+    return data;
+}
+
+
 
 module.exports={
     mostrarProductos,
-    buscarPorIDProd,
+    buscarProdPorID,
     nuevoProducto,
     modificarProducto,
-    borrarProducto
+    borrarProducto,
+    filtrarPorCategoria
 }

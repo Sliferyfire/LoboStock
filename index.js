@@ -1,4 +1,5 @@
 var express = require("express");
+const bodyParser = require('body-parser');
 var cors = require("cors");
 var path = require("path");
 // var session = require("express-session");  Se almacena en el servidor 
@@ -12,12 +13,14 @@ var app = express();
 app.set("view engine", "ejs");
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(session({
     name: 'session',
     keys: ["ahfhafhafueaf17rbqcb17eb"],
     maxAge: 24 * 60 * 60 * 1000,
     cookie: {
-        secure: true,
+        secure: false,
         httpOnly: true,
       }
 }));
