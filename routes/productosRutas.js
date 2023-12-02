@@ -83,7 +83,7 @@ ruta.get("/editarProducto/:id",async (req,res)=>{
     var prod = await buscarProdPorID(req.params.id);
     res.render("productos/modificarProducto",{prod})
   }
-  else
+  else 
     res.redirect("/");
 });
 
