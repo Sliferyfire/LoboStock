@@ -111,12 +111,11 @@ async function filtrarPorCategoria(categoria){
 }
 
 
-
 module.exports={
     mostrarProductos,
     buscarProdPorID,
     nuevoProducto,
     modificarProducto,
     borrarProducto,
-    filtrarPorCategoria
+    filtrarPorCategoria,
 }
