@@ -1,6 +1,6 @@
 var ruta = require("express").Router();
 var subirArchivos=require("../middleWares/subirArchivos");
-var borrarProducto=require("../middleWares/borrarArchivos");
+var borrarArchivo=require("../middleWares/borrarArchivos");
 var { mostrarProductos,  nuevoProducto,  modificarProducto,  buscarProdPorID,  borrarProducto, filtrarPorCategoria } = require("../database/productosBD");
 //const subirArchivos = require("../middlewares/subirArchivos");
 
@@ -38,7 +38,14 @@ ruta.get("/api/buscarProductoPorId/:id", async (req, res) => {
 });
 
 ruta.post("/api/editarProducto", subirArchivos(),  async (req, res) => {
-    req.body.foto=req.file.originalname; 
+    var prod = await buscarProdPorID(req.body.id);
+    try {
+        req.body.foto= req.file.originalname;
+        if(req.file)
+            borrarArchivo(prod.foto); 
+    } catch (error) {
+        req.body.foto= prod.foto;
+    }
     var error = await modificarProducto(req.body);
     if (error==0){
         res.status(200).json("Producto actualizado");
@@ -49,7 +56,7 @@ ruta.post("/api/editarProducto", subirArchivos(),  async (req, res) => {
 });
 
 ruta.get("/api/borrarProducto/:id", async (req, res) => {
-    var prod = await buscarPorID(req.params.id);
+    var prod = await buscarProdPorID(req.params.id);
     borrarArchivo(prod.foto);
     var error = await borrarProducto(req.params.id);
     if(error == 0)

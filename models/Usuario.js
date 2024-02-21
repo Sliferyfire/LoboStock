@@ -18,7 +18,7 @@ class Usuario{
     set nombre(nombre){
         nombre.length>0? (this._nombre=nombre) : (this.bandera=1);
     }
-    set password(password){
+    set password(password){ 
         password.length>0? (this._password=password) : (this.bandera=1);
     }
     set usuario(usuario){

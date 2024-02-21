@@ -71,35 +71,36 @@ async function nuevoUsuario(datos){
     return error;
 }
 
-async function modificarUsuario(datos){
+async function modificarUsuario(datos) {
     console.log(datos);
-    var error = 1; 
+    var error = 1;
     var respuestaBuscar = await buscarPorID(datos.id);
-    if (respuestaBuscar != undefined){
-        if(datos.password == ""){
-            pass = buscarPorID(datos.id);
+    if (respuestaBuscar != undefined) {
+        if (datos.password == '' || datos.password == undefined || datos.password == null) {
+            var pass = respuestaBuscar; // Se corrige la asignación de la variable "pass"
             datos.password = pass.password;
             datos.salt = pass.salt;
-        }
-        else{
-            var{salt,hash} = encriptarPassword(datos.password);
+            // console.log('Password viejo: ----------->' + datos.password);
+        } else {
+            var { salt, hash } = encriptarPassword(datos.password);
             datos.password = hash;
             datos.salt = salt;
+            // console.log('Password nuevo: ----------->' + datos.password);
         }
-        var user = new Usuario(datos.id,datos);
-        if (user.bandera == 0){
+        var user = new Usuario(datos.id, datos); // Se asume que la clase Usuario recibe el id y los datos
+        if (user.bandera == 0) {
             try {
                 await conexion.doc(user.id).set(user.obtenerDatos);
                 console.log("Registro actualizado");
                 error = 0;
-            } 
-            catch (err) {
-                console.log("Error al modificar al usuario: "+err);    
+            } catch (err) {
+                console.log("Error al modificar al usuario: " + err);
             }
         }
     }
     return error;
 }
+
 
 async function borrarUsuario(id){
     var error=1;
