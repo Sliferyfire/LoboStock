@@ -51,7 +51,8 @@ async function buscarPorUsuario(usuario){
 }
 
 async function nuevoUsuario(datos){
-    // console.log(datos);
+    console.log("Datos recibidos por la funcion: ");
+    console.log(datos);
     var {hash,salt}= encriptarPassword(datos.password);
     datos.password = hash;
     datos.salt = salt;

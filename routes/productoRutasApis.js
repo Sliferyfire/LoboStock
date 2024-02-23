@@ -15,15 +15,16 @@ ruta.get("/api/mostrarProducto", async (req, res) => {
 });
 
 ruta.post("/api/nuevoproducto", subirArchivos(), async (req, res) => {
-    //console.log(req.body);
     req.body.foto=req.file.originalname; 
+    // console.log(req.body);
+
     var error = await nuevoProducto(req.body);
     if(error==0){
         res.status(200).json("Producto registrado");
     } 
     else{
         res.status(400).json("datos incorrectos");
-    }
+    } 
 });
 
 
@@ -46,6 +47,7 @@ ruta.post("/api/editarProducto", subirArchivos(),  async (req, res) => {
     } catch (error) {
         req.body.foto= prod.foto;
     }
+    // console.log(req.body);
     var error = await modificarProducto(req.body);
     if (error==0){
         res.status(200).json("Producto actualizado");

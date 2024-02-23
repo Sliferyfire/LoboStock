@@ -9,7 +9,7 @@ var rutas = require("./routes/usuariosRutas");
 var rutasPr = require("./routes/productosRutas");
 var rutasUsuariosApis = require("./routes/usuariosRutasApis");
 var rutasProductosApis = require("./routes/productoRutasApis");
-
+ 
 
 var app = express();
 app.set("view engine", "ejs");
@@ -20,10 +20,10 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(session({
     name: 'session',
     keys: ["ahfhafhafueaf17rbqcb17eb"],
-    maxAge: 24 * 60 * 60 * 1000,
-    cookie: {
+    maxAge: 24 * 60 * 60 * 1000, 
+    cookie: { 
         secure: false,
-        httpOnly: true,
+        httpOnly: true,  
       }
 }));
 app.use("/", express.static(path.join(__dirname,"/web")))
@@ -36,7 +36,7 @@ app.use("/",rutasUsuariosApis);
 app.use("/",rutasProductosApis);
   
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 
 app.listen(port,()=>{
     console.log("Servidor en http://localhost:"+port);

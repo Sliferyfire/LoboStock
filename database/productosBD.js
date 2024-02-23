@@ -66,7 +66,7 @@ async function modificarProducto(datos){
         if (prod.bandera == 0){
             try {
                 await conexion.doc(prod.id).set(prod.obtenerDatos);
-                console.log("Producto actualizado");
+                console.log("Producto actualizado"); 
                 error = 0;
             } 
             catch (err) {

@@ -13,8 +13,9 @@ ruta.get("/api/mostrarUsuarios", async(req, res)=>{
     
 });
 
-ruta.post("/api/nuevousuario", async(req, res)=>{
-    //console.log(req.body);
+ruta.post("/api/nuevousuario",subirArchivos(), async(req, res)=>{
+    console.log("Datos recibidos por la ruta nuevo: ");
+    console.log(req.body);
     // req.body.foto=req.file.originalname; 
     var error = await nuevoUsuario(req.body);
     if(error==0){
@@ -35,7 +36,9 @@ ruta.get("/api/buscarUsuarioPorId/:id",async(req, res)=>{
     }
 });
 
-ruta.post("/api/editarUsuario", async(req, res)=>{
+ruta.post("/api/editarUsuario",subirArchivos() ,async(req, res)=>{
+    console.log("Datos recibidos por la ruta editar: ");
+    console.log(req.body);
     // req.body.foto=req.file.originalname; 
     var error=await modificarUsuario(req.body);
     if (error==0){
